@@ -5,7 +5,9 @@ tasks from BYOND.
 
 This library is currently used in the [tgstation] codebase, and is required for it to run.
 A pre-compiled DLL version can be found in the repo root, but you can build your own from
-this repo at your preference.
+this repo at your preference. Builds can also be found on the [releases page].
+
+[releases page]: https://github.com/tgstation/rust-g/releases
 
 ## Dependencies
 
@@ -36,6 +38,16 @@ The [Rust] compiler:
     # Windows
     rustup override add stable-i686-pc-windows-msvc
     ```
+
+System libraries:
+
+* Ubuntu and Debian users run:
+
+    ```sh
+    sudo apt-get install zlib1g-dev:i386
+    ```
+
+* Other distributions install the appropriate **32-bit development** and **32-bit runtime** packages.
 
 OpenSSL (**Optional**, not required by the default configuration):
 
