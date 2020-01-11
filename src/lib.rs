@@ -31,3 +31,5 @@ pub mod hash;
 pub mod log;
 #[cfg(feature="url")]
 pub mod url;
+#[cfg(feature="udp_shipper")]
+pub mod udp_shipper;
