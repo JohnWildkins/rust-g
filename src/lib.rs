@@ -13,11 +13,22 @@ extern crate hex;
 extern crate percent_encoding;
 #[cfg(feature="png")]
 extern crate png;
+#[cfg(feature="http")]
+extern crate reqwest;
+#[cfg(feature="http")]
+#[macro_use]
+extern crate serde_derive;
+#[cfg(feature="http")]
+extern crate serde_json;
+#[cfg(feature="http")]
+#[macro_use]
+extern crate lazy_static;
 
 #[macro_use]
 mod byond;
 #[allow(dead_code)]
 mod error;
+mod jobs;
 
 #[cfg(feature="dmi")]
 pub mod dmi;
@@ -33,3 +44,5 @@ pub mod log;
 pub mod url;
 #[cfg(feature="udp_shipper")]
 pub mod udp_shipper;
+#[cfg(feature="http")]
+pub mod http;
