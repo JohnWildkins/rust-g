@@ -47,3 +47,38 @@ jobs:
         with:
           name: rust_g
           path: target/i686-unknown-linux-gnu/release/librust_g.so
+  deploy:
+    name: Create Release
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload rust_g.dll
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: target/i686-pc-windows-msvc/release/rust_g.dll
+          asset_name: rust_g.dll
+          asset_content_type: application/octet-stream
+      - name: Upload librust_g.so
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: target/i686-unknown-linux-gnu/release/librust_g.so
+          asset_name: librust_g.so
+          asset_content_type: application/octet-stream
